@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 
-const getAbout = () => {
+const getTeachers = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(false);
+      setLoading(true);
       setError(null);
 
       try {
-        const response = await fetch(`https://www.jamiatullatif.com/api/about`);
+        const response = await fetch(`https://www.jamiatullatif.com/api/teachers`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -20,7 +20,7 @@ const getAbout = () => {
         const result = await response.json();
         setData(result.data);
       } catch (err) {
-        setError("পরিচিতি লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        setError("শিক্ষক পরিচিতি লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         console.error("Failed to fetch data:", err);
       } finally {
         setLoading(false);
@@ -33,4 +33,4 @@ const getAbout = () => {
   return { data, loading, error };
 };
 
-export default getAbout;
+export default getTeachers;

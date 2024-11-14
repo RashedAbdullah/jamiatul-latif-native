@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 
-const getAbout = () => {
+const getFatwas = (limit = 0) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(false);
-      setError(null);
+      setLoading(true); // Start loading
+      setError(null); // Reset error state
 
       try {
-        const response = await fetch(`https://www.jamiatullatif.com/api/about`);
+        const response = await fetch(
+          `https://www.jamiatullatif.com/api/fatwas?limit=${limit}`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -20,7 +22,7 @@ const getAbout = () => {
         const result = await response.json();
         setData(result.data);
       } catch (err) {
-        setError("পরিচিতি লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        setError("ফতোয়া লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         console.error("Failed to fetch data:", err);
       } finally {
         setLoading(false);
@@ -28,9 +30,9 @@ const getAbout = () => {
     };
 
     getData();
-  });
+  }, [limit]);
 
   return { data, loading, error };
 };
 
-export default getAbout;
+export default getFatwas;

@@ -1,95 +1,72 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
 import { Link } from "expo-router";
 import getArticles from "../../fetch/articles";
 
 const ArticlesScreen = () => {
-  const articles = getArticles();
+  const { data: articles, loading, error } = getArticles();
+
+  if (loading) {
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size="large" color="#1D4ED8" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View className="flex-1 justify-center items-center">
+        <Text className="text-lg text-red-500">{error}</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>নিবন্ধসমূহ</Text>
-      {articles.map((article, index) => (
-        <View key={index} style={styles.card}>
-          <Image
-            source={
-              article.coverImage
-                ? { uri: article.coverImage }
-                : require("../../assets/images/ifta_book.png")
-            }
-            style={styles.image}
-          />
-          <Link href="/">
-            <Text style={styles.title}>{article.title}</Text>
-          </Link>
-          <Text style={styles.author}>লেখক: {article.author}</Text>
-          <Text style={styles.date}>
-            {new Date(article.publishedAt).toLocaleDateString("bn", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}{" "}
-            ইং
+    <FlatList
+      data={articles}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => <ArticleCard article={item} />}
+      ListHeaderComponent={() => (
+        <View className="p-4 bg-white">
+          <Text className="text-2xl font-bold text-center my-4 text-gray-800">
+            নিবন্ধসমূহ
           </Text>
-          <Text style={styles.description}>{article.description}</Text>
         </View>
-      ))}
-    </ScrollView>
+      )}
+      contentContainerStyle={{ padding: 16, backgroundColor: "#f5f5f5" }}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    paddingHorizontal: 16,
-  },
-  header: {
-    fontSize: 26,
-    fontWeight: "bold",
-    marginTop: 16,
-    marginBottom: 16,
-    color: "#0f172a",
-    textAlign: "center",
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  image: {
-    width: "100%",
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 12,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#0f172a",
-    marginBottom: 8,
-  },
-  author: {
-    fontSize: 16,
-    color: "#6b7280",
-    marginBottom: 4,
-  },
-  date: {
-    fontSize: 14,
-    color: "#9ca3af",
-    marginBottom: 8,
-  },
-  description: {
-    fontSize: 16,
-    color: "#374151",
-    lineHeight: 22,
-  },
-});
+const ArticleCard = ({ article }) => (
+  <View className="bg-white rounded-lg p-4 mb-4 shadow-md">
+    <Image
+      source={
+        article.coverImage
+          ? { uri: article.coverImage }
+          : require("../../assets/images/ifta_book.png")
+      }
+      className="w-full h-48 rounded-md mb-3"
+    />
+    <Link href="/">
+      <Text className="text-xl font-bold text-gray-900 mb-2">
+        {article.title}
+      </Text>
+    </Link>
+    <Text className="text-base text-gray-600 mb-1">লেখক: {article.author}</Text>
+    <Text className="text-sm text-gray-500 mb-2">
+      {new Date(article.publishedAt).toLocaleDateString("bn", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })}{" "}
+      ইং
+    </Text>
+    <Text className="text-base text-gray-700 leading-6">
+      {article.description}
+    </Text>
+  </View>
+);
 
 export default ArticlesScreen;
