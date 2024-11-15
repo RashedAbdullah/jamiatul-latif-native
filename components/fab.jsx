@@ -5,9 +5,7 @@ import { FAB, Portal } from "react-native-paper";
 const MyComponent = () => {
   const router = useRouter(); // Correctly call useRouter to get the router object
   const [state, setState] = React.useState({ open: false });
-
   const onStateChange = ({ open }) => setState({ open });
-
   const { open } = state;
 
   return (

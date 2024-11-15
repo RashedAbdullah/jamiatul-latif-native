@@ -63,7 +63,7 @@ const HomeScreen = () => {
                 key={inf._id}
                 className="bg-teal-50 p-4 rounded-lg mb-2 shadow"
               >
-                <Text className="text-4xl">{getEngToBn(inf.count)}</Text>
+                <Text className="text-4xl">{getEngToBn(inf.count)} +</Text>
                 <Text className="font-semibold text-gray-700 mb-1">
                   {inf.title}
                 </Text>

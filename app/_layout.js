@@ -37,9 +37,21 @@ export default function RootLayout() {
     <PaperProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Header />
-        <Stack screenOptions={false}>
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: "#FFF" },
+            headerTintColor: "#0f172a",
+          }}
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen name="teachers" options={{ title: "শিক্ষকবৃন্দ" }} />
+          <Stack.Screen
+            name="students"
+            options={{ title: "শিক্ষার্থী তথ্য" }}
+          />
+          <Stack.Screen name="results" options={{ title: "পরীক্ষার ফলাফল" }} />
+          <Stack.Screen name="notices" options={{ title: "নোটিশ" }} />
         </Stack>
         <StatusBar backgroundColor="#C5DEFE" translucent={false} style="dark" />
       </ThemeProvider>

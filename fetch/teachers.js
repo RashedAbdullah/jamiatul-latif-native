@@ -11,7 +11,9 @@ const getTeachers = () => {
       setError(null);
 
       try {
-        const response = await fetch(`https://www.jamiatullatif.com/api/teachers`);
+        const response = await fetch(
+          `https://www.jamiatullatif.com/api/teachers`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -28,7 +30,7 @@ const getTeachers = () => {
     };
 
     getData();
-  });
+  }, []); // Adding an empty dependency array
 
   return { data, loading, error };
 };
