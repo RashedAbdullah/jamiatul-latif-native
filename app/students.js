@@ -7,7 +7,7 @@ const StudentsScreen = () => {
     "66f13d0337317a1fbb7e7ff7"
   );
 
-  return (  
+  return (
     <View>
       <Text>StudentsScreen</Text>
     </View>
