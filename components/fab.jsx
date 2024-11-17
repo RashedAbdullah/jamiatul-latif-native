@@ -24,7 +24,7 @@ const MyComponent = () => {
           {
             icon: "account-group",
             label: "শিক্ষার্থী",
-            onPress: () => router.push("/students"),
+            onPress: () => router.push("/class-list"),
           },
           {
             icon: "clipboard-list",

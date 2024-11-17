@@ -77,15 +77,13 @@ const useGetStudentsByYearAndClass = (
       return;
     }
 
-    const controller = new AbortController(); // For canceling fetch requests
     const getData = async () => {
       setLoading(true);
       setError(null);
 
       try {
         const response = await fetch(
-          `https://www.jamiatullatif.com/api/students-by-year-and-class?yearId=${yearId}&classId=${classId}`,
-          { signal: controller.signal }
+          `https://www.jamiatullatif.com/api/students-by-year-and-class?yearId=${yearId}&classId=${classId}`
         );
 
         if (!response.ok) {
@@ -99,12 +97,8 @@ const useGetStudentsByYearAndClass = (
           throw new Error("Invalid response structure from server.");
         }
 
-        setData(result.data);
+        setData(result?.data);
       } catch (err) {
-        if (err.name === "AbortError") {
-          console.log("Fetch aborted");
-          return;
-        }
         setError(
           err.message === "Failed to fetch"
             ? "সার্ভারে সংযোগ করতে ব্যর্থ হয়েছে।"
@@ -117,12 +111,7 @@ const useGetStudentsByYearAndClass = (
     };
 
     getData();
-
-    // Cleanup on unmount or dependency change
-    return () => {
-      controller.abort();
-    };
-  }, [yearId, classId]); // Both yearId and classId as dependencies
+  }, [yearId, classId]);
 
   return { data, loading, error };
 };

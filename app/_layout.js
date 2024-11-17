@@ -52,6 +52,7 @@ export default function RootLayout() {
           />
           <Stack.Screen name="results" options={{ title: "পরীক্ষার ফলাফল" }} />
           <Stack.Screen name="notices" options={{ title: "নোটিশ" }} />
+          <Stack.Screen name="class-list" options={{ title: "শিক্ষাবর্ষ ও ক্লাস" }} />
         </Stack>
         <StatusBar backgroundColor="#C5DEFE" translucent={false} style="dark" />
       </ThemeProvider>
