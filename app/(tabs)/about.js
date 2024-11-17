@@ -1,24 +1,18 @@
 import React from "react";
 import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import getAbout from "../../fetch/about";
+import LoadingComponent from "../../components/loading";
+import ErrorComponent from "../../components/error";
 
 const AboutScreen = () => {
   const { data, loading, error } = getAbout();
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white p-4">
-        <Text className="text-lg text-red-500 text-center">{error}</Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   return (

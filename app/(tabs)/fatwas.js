@@ -2,25 +2,19 @@ import React from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import getFatwas from "@/fetch/fatwas";
 import { getEngToBn } from "@/utils/get-eng-to-bn";
+import LoadingComponent from "../../components/loading";
+import ErrorComponent from "../../components/error";
 
 // Main FatwasScreen Component
 const FatwasScreen = () => {
   const { data: fatwas, loading, error } = getFatwas();
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <Text className="text-lg text-red-500">{error}</Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   return (

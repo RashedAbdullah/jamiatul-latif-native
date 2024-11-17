@@ -1,36 +1,38 @@
-import { View, Text, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator, Image } from "react-native";
 import React from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons"; // Import Material Icons
 import { useGetSingleStudent } from "../fetch/students";
 import { getEngToBn } from "@/utils/get-eng-to-bn";
+import { useGetSingleStudentsResult } from "../fetch/results";
+import {
+  getMarksValue,
+  getTotalMarks,
+  getAverageMarks,
+} from "../utils/get-mark-value";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const StudentDetailsScreen = () => {
   const { studentId } = useLocalSearchParams();
   const { data, loading, error } = useGetSingleStudent(studentId);
+  const {
+    data: resultData,
+    loading: resultLoading,
+    error: resultError,
+  } = useGetSingleStudentsResult(studentId);
 
-  if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-        <Text className="text-gray-500 mt-4 text-lg">তথ্য লোড হচ্ছে...</Text>
-      </View>
-    );
+  if (loading || resultLoading) {
+    return <LoadingComponent />;
   }
 
-  if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-red-100">
-        <Text className="text-red-600 text-lg text-center px-4">
-          শিক্ষার্থীর তথ্য লোড করতে ব্যর্থ: {error.message}
-        </Text>
-      </View>
-    );
+  if (error || resultError) {
+    return <ErrorComponent err={error || resultError} />;
   }
 
   return (
     <ScrollView className="bg-white">
-      <Stack.Screen options={{title: data.name}}/>
+      <Stack.Screen options={{ title: data.name }} />
       {/* Header Section */}
       <View className="bg-blue-100 py-8 px-4 items-center">
         {/* Profile Image or Icon */}
@@ -84,6 +86,56 @@ const StudentDetailsScreen = () => {
               {data.academicYearId.academicYear} ইং
             </Text>
           </View>
+        </View>
+
+        {/* Results Section */}
+        <View className="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow mt-5">
+          <Text className="text-lg font-bold text-gray-800">প্রাপ্ত ফলাফল</Text>
+          <Text className="text-lg font-bold text-gray-800 text-center">
+            {resultData.examNameId.examName}
+          </Text>
+          {resultData?.marks?.length > 0 ? (
+            <View className="mt-2 space-y-2 shadow">
+              {resultData.marks.map((result, index) => (
+                <View
+                  key={index}
+                  className="flex-row justify-between items-center bg-gray-100 p-3"
+                >
+                  <Text className="text-gray-700 font-medium">
+                    {result.book}
+                  </Text>
+                  <Text
+                    className={`font-bold ${
+                      result.mark < 40 ? "text-red-600" : "text-gray-800"
+                    }`}
+                  >
+                    {getEngToBn(result.mark)}
+                  </Text>
+                </View>
+              ))}
+
+              <View className="flex-row justify-between items-center bg-gray-100 p-3">
+                <Text className="text-gray-700 font-bold">মোট</Text>
+                <Text className="text-gray-800 font-bold">
+                  {getEngToBn(getTotalMarks(resultData.marks))}
+                </Text>
+              </View>
+              <View className="flex-row justify-between items-center bg-gray-100 p-3">
+                <Text className="text-gray-700 font-bold">গড়</Text>
+                <Text className="text-gray-800 font-bold">
+                  {getEngToBn(getAverageMarks(resultData.marks))}
+                </Text>
+              </View>
+              <View className="flex-row justify-between items-center bg-gray-100 p-3">
+                <Text className="text-gray-700 font-bold">বিভাগ</Text>
+                <Text className="text-gray-800 font-bold">
+                  {getMarksValue(resultData.marks)}
+                </Text>
+              </View>
+            </View>
+          ) : (
+            <Text className="text-gray-500 mt-2">ফলাফল পাওয়া যায়নি।</Text>
+          )}
         </View>
       </View>
     </ScrollView>

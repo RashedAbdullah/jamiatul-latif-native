@@ -2,24 +2,18 @@ import React from "react";
 import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
 import { Link } from "expo-router";
 import getArticles from "../../fetch/articles";
+import LoadingComponent from "../../components/loading";
+import ErrorComponent from "../../components/error";
 
 const ArticlesScreen = () => {
   const { data: articles, loading, error } = getArticles();
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-lg text-red-500">{error}</Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   return (

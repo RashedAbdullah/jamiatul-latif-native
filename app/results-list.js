@@ -11,6 +11,8 @@ import { useGetClasses } from "../fetch/classes";
 import { useGetYears } from "../fetch/years";
 import { Picker } from "@react-native-picker/picker"; // Import from the new package
 import { useRouter } from "expo-router";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const ClassListByYear = () => {
   const router = useRouter();
@@ -29,22 +31,11 @@ const ClassListByYear = () => {
   const [selectedYear, setSelectedYear] = useState(null);
 
   if (classesLoading || yearsLoading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-        <Text className="text-gray-500 mt-4">তথ্য লোড হচ্ছে...</Text>
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (classesError || yearsError) {
-    return (
-      <View className="flex-1 justify-center items-center bg-red-100">
-        <Text className="text-red-600 text-lg">
-          ত্রুটি: {classesError?.message || yearsError?.message}
-        </Text>
-      </View>
-    );
+    return <ErrorComponent err={classesError || yearsError} />;
   }
 
   return (

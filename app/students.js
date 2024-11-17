@@ -11,6 +11,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"; // Importin
 import { useGetStudentsByYearAndClass } from "../fetch/students";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { getEngToBn } from "@/utils/get-eng-to-bn";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const StudentsScreen = () => {
   const router = useRouter();
@@ -22,22 +24,11 @@ const StudentsScreen = () => {
   );
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-        <Text className="text-gray-500 mt-4 text-lg">তথ্য লোড হচ্ছে...</Text>
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-red-100">
-        <Text className="text-red-600 text-lg text-center px-4">
-          শিক্ষার্থীদের তথ্য লোড করতে ব্যর্থ: {error.message}
-        </Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   return (

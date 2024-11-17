@@ -11,18 +11,14 @@ import {
 import getTeachers from "../fetch/teachers";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const TeachersScreen = () => {
   const { data: teachers, loading, error } = getTeachers();
 
-  if (loading)
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-      </View>
-    );
-  if (error)
-    return <Text className="text-center text-lg">Error loading teachers</Text>;
+  if (loading) return <LoadingComponent />;
+  if (error) return <ErrorComponent err={error} />;
 
   return (
     <ScrollView className="bg-white p-4">

@@ -4,28 +4,19 @@ import { useLocalSearchParams } from "expo-router";
 import { useGetResultsByYearAndClass } from "@/fetch/results";
 import { getEngToBn } from "@/utils/get-eng-to-bn";
 import { getMarksValue, getTotalMarks } from "../utils/get-mark-value";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const ResultsScreen = () => {
   const { yearId, classId } = useLocalSearchParams();
   const { data, loading, error } = useGetResultsByYearAndClass(yearId, classId);
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#1D4ED8" />
-        <Text className="mt-4 text-lg text-gray-600">তথ্য লোড হচ্ছে...</Text>
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-red-100 p-4">
-        <Text className="text-red-600 text-lg text-center">
-          ফলাফল লোড করতে ব্যর্থ: {error.message}
-        </Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   const sortedResults = data

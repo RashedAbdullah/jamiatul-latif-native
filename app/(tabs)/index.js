@@ -6,7 +6,9 @@ import { Link } from "expo-router";
 import getArticles from "@/fetch/articles";
 import getFatwas from "@/fetch/fatwas";
 import FavComponent from "@/components/fab";
-import { PaperProvider } from "react-native-paper";
+
+import ErrorComponent from "../../components/error";
+import LoadingComponent from "../../components/loading";
 
 const HomeScreen = () => {
   const info = getInfo();
@@ -109,11 +111,9 @@ const HomeScreen = () => {
               প্রবন্ধ সমূহ
             </Text>
             {articleLoading ? (
-              <Text className="text-center text-gray-500">লোড হচ্ছে...</Text>
+              <LoadingComponent />
             ) : articleError ? (
-              <Text className="text-center text-red-500">
-                লেখা লোড করতে ব্যর্থ হয়েছে
-              </Text>
+              <ErrorComponent err={articleError} />
             ) : (
               articleData.map((article) => (
                 <View
@@ -154,11 +154,9 @@ const HomeScreen = () => {
               ফতোয়া সমূহ
             </Text>
             {fatwaLoading ? (
-              <Text className="text-center text-gray-500">লোড হচ্ছে...</Text>
+              <LoadingComponent />
             ) : fatwaError ? (
-              <Text className="text-center text-red-500">
-                ফতোয়া লোড করতে ব্যর্থ হয়েছে
-              </Text>
+              <ErrorComponent err={fatwaError} />
             ) : (
               fatwaData.map((fatwa) => (
                 <View

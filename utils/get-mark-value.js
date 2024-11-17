@@ -20,4 +20,11 @@ const getTotalMarks = (marks) => {
   return totalMarks;
 };
 
-export { getMarksValue, getTotalMarks };
+const getAverageMarks = (marks) => {
+  if (marks.length === 0) return 0; // Prevent division by zero
+  const totalMarks = marks.reduce((acc, mark) => acc + mark.mark, 0);
+  const averageMarks = totalMarks / marks.length;
+  return averageMarks;
+};
+
+export { getMarksValue, getTotalMarks, getAverageMarks };

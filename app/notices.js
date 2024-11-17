@@ -1,28 +1,18 @@
 import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import React from "react";
 import getNotices from "@/fetch/notices";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const NoticesScreen = () => {
   const { data: notices, loading, error } = getNotices();
 
   if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#2563eb" />
-        <Text className="mt-4 text-lg text-gray-700">লোড হচ্ছে...</Text>
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-gray-100">
-        <Text className="text-xl font-semibold text-red-600">
-          নোটিশ লোড করতে সমস্যা হয়েছে
-        </Text>
-        <Text className="text-base text-gray-700 mt-2">আবার চেষ্টা করুন।</Text>
-      </View>
-    );
+    return <ErrorComponent err={error} />;
   }
 
   return (
