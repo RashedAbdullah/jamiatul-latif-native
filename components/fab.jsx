@@ -29,7 +29,7 @@ const MyComponent = () => {
           {
             icon: "clipboard-list",
             label: "ফলাফল",
-            onPress: () => router.push("/results"),
+            onPress: () => router.push("/results-list"),
           },
           {
             icon: "newspaper",
