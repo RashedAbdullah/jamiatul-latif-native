@@ -1,29 +1,33 @@
-// /components/Header.js
-
+import { Link } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const Header = () => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.headerText}>জামিয়াতুল লতিফ রূপগঞ্জ</Text>
+    <View style={styles.container}>
+      <Link href="/">
+        <Text style={styles.title}>জামিয়াতুল লতিফ রূপগঞ্জ</Text>
+      </Link>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    height: 60,
-    backgroundColor: "#C5DEFE",
-    alignItems: "center",
+  container: {
+    paddingVertical: 8,
+    backgroundColor: "#1e656d",
     justifyContent: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 5,
   },
-  headerText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#0f172a", // Dark color for text
+  title: {
+    fontSize: 24,
+    fontWeight: "800",
+    color: "#FFFFFF",
   },
 });
 

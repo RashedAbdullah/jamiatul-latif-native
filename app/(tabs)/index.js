@@ -6,9 +6,9 @@ import { Link } from "expo-router";
 import getArticles from "@/fetch/articles";
 import getFatwas from "@/fetch/fatwas";
 import FavComponent from "@/components/fab";
-
 import ErrorComponent from "../../components/error";
 import LoadingComponent from "../../components/loading";
+// import NotificationComponent from "../../components/notification";
 
 const HomeScreen = () => {
   const info = getInfo();
@@ -25,6 +25,7 @@ const HomeScreen = () => {
 
   return (
     <ScrollView className="bg-white">
+      {/* <NotificationComponent /> */}
       <FavComponent />
       <View className="flex-1 p-4">
         {/* Image Section */}
@@ -40,7 +41,7 @@ const HomeScreen = () => {
         <View className="flex-1 justify-center mb-4 pt-10">
           <Text className="text-2xl font-semibold text-gray-800 text-center py-2 leading-8">
             জ্ঞান কেবল সূচনা, জ্ঞানের পরেই রয়েছে প্রজ্ঞা{" "}
-            <Text className="text-green-700 font-bold">জমিয়াতুল লতিফে</Text>{" "}
+            <Text className="text-[#1e656d] font-bold">জমিয়াতুল লতিফে</Text>{" "}
             আমরা মনকে করি আলোকিত এবং আত্মাকে করি প্রভুর পথে অনুপ্রাণিত।
           </Text>
           <Text className="text-gray-600 text-center leading-6">
@@ -50,11 +51,11 @@ const HomeScreen = () => {
 
           {/* Buttons */}
           <View className="flex-row justify-center gap-2 mt-5">
-            <TouchableOpacity className="flex-row items-center bg-green-600 py-2 px-4 rounded-lg mx-1">
+            <TouchableOpacity className="flex-row items-center bg-[#1e656d] py-2 px-4 rounded-lg mx-1">
               <Text className="text-white font-medium">মতামত দিন</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex-row items-center bg-transparent border border-green-600 py-2 px-4 rounded-lg mx-1">
-              <Text className="text-green-600 font-medium">আরও জানুন</Text>
+            <TouchableOpacity className="flex-row items-center bg-transparent border border-[#1e656d] py-2 px-4 rounded-lg mx-1">
+              <Text className="text-[#1e656d] font-medium">আরও জানুন</Text>
             </TouchableOpacity>
           </View>
 
@@ -63,7 +64,7 @@ const HomeScreen = () => {
             {info.map((inf) => (
               <View
                 key={inf._id}
-                className="bg-teal-50 p-4 rounded-lg mb-2 shadow"
+                className="bg-[#d4f1f3] p-4 rounded-lg mb-2 shadow"
               >
                 <Text className="text-4xl">{getEngToBn(inf.count)} +</Text>
                 <Text className="font-semibold text-gray-700 mb-1">
@@ -74,7 +75,7 @@ const HomeScreen = () => {
           </View>
 
           {/* Darul Ifta Section */}
-          <View className="bg-teal-100 p-5 rounded-lg mt-10 shadow">
+          <View className="bg-[#d4f1f3] p-5 rounded-lg mt-10 shadow">
             <Image
               source={require("@/assets/images/ifta_book.png")}
               className="w-full h-[150px] rounded-md mb-4"
@@ -92,13 +93,13 @@ const HomeScreen = () => {
             <View className="flex-row justify-center gap-4">
               <Link
                 href="/question"
-                className="text-lg text-teal-700 font-medium underline"
+                className="text-lg text-[#1e656d] font-medium underline"
               >
                 আপনার জিজ্ঞাসা
               </Link>
               <Link
                 href="/fatwas"
-                className="text-lg text-teal-700 font-medium underline"
+                className="text-lg text-[#1e656d] font-medium underline"
               >
                 ফতোয়া দেখুন
               </Link>

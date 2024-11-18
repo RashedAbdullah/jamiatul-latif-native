@@ -15,6 +15,7 @@ const MyComponent = () => {
         visible
         icon={open ? "account-plus" : "account-edit"}
         color="white"
+        variant="surface"
         actions={[
           {
             icon: "school",
