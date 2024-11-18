@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-const getFatwas = (limit = 0) => {
+const getArticles = (limit = 0) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
         const response = await fetch(
@@ -35,4 +35,4 @@ const getFatwas = (limit = 0) => {
   return { data, loading, error };
 };
 
-export default getFatwas;
+export default getArticles;

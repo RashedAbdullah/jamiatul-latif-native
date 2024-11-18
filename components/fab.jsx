@@ -33,9 +33,9 @@ const MyComponent = () => {
             onPress: () => router.push("/results-list"),
           },
           {
-            icon: "newspaper",
-            label: "নোটিশ",
-            onPress: () => router.push("/notices"),
+            icon: "information",
+            label: "পরিচিতি",
+            onPress: () => router.push("/about"),
           },
         ]}
         onStateChange={onStateChange}

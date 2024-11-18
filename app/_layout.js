@@ -51,7 +51,7 @@ export default function RootLayout() {
             options={{ title: "শিক্ষার্থী তথ্য" }}
           />
           <Stack.Screen name="results" options={{ title: "পরীক্ষার ফলাফল" }} />
-          <Stack.Screen name="notices" options={{ title: "নোটিশ" }} />
+          <Stack.Screen name="about" options={{ title: "মাদ্রাসা পরিচিতি" }} />
           <Stack.Screen
             name="class-list"
             options={{ title: "শিক্ষাবর্ষ ও ক্লাস" }}

@@ -53,11 +53,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="about"
+        name="notification"
         options={{
-          title: "পরিচিতি",
+          title: "নোটিফিকেশন",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="about" color={color} />
+            <IconSymbol size={28} name="bell" color={color} />
           ),
         }}
       />

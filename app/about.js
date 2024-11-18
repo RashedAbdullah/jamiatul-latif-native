@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, ActivityIndicator, ScrollView } from "react-native";
-import getAbout from "../../fetch/about";
-import LoadingComponent from "../../components/loading";
-import ErrorComponent from "../../components/error";
+import { View, Text, ScrollView } from "react-native";
+import getAbout from "../fetch/about";
+import LoadingComponent from "../components/loading";
+import ErrorComponent from "../components/error";
 
 const AboutScreen = () => {
   const { data, loading, error } = getAbout();
@@ -19,7 +19,7 @@ const AboutScreen = () => {
     <ScrollView className="flex-1 bg-gray-100 p-4">
       <View className="bg-white rounded-lg p-6 shadow-md">
         <Text className="text-2xl font-bold text-gray-800 mb-4 text-center">
-          মাদ্রাসার পরিচিতি
+          মাদ্রাসা পরিচিতি
         </Text>
         {/* Mapping through data to display title and details dynamically */}
         {data.map((section, index) => (

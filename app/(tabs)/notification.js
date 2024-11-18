@@ -1,10 +1,10 @@
-import { View, Text, ActivityIndicator, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import getNotices from "@/fetch/notices";
-import LoadingComponent from "../components/loading";
-import ErrorComponent from "../components/error";
+import LoadingComponent from "../../components/loading";
+import ErrorComponent from "../../components/error";
 
-const NoticesScreen = () => {
+const NotificationScreen = () => {
   const { data: notices, loading, error } = getNotices();
 
   if (loading) {
@@ -18,7 +18,7 @@ const NoticesScreen = () => {
   return (
     <ScrollView className="bg-gray-100 min-h-screen p-6">
       <Text className="text-3xl font-extrabold text-center text-blue-700 py-2 mb-6">
-        নোটিশ বোর্ড
+        নোটিফিকেশন
       </Text>
 
       {notices.map((notice) => (
@@ -39,4 +39,4 @@ const NoticesScreen = () => {
   );
 };
 
-export default NoticesScreen;
+export default NotificationScreen;

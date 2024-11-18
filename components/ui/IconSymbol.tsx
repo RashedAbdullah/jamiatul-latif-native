@@ -8,7 +8,7 @@ const MAPPING = {
   'house.fill': 'home',
   'article': 'article',
   'fatwa': 'book',
-  'about': 'info',
+  'bell': 'notifications',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as Partial<
