@@ -36,6 +36,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1b87ba50-be86-439f-a2d8-21454e46805b"
+      }
+    },
+    "owner": "rashed4abdullah"
   }
 }

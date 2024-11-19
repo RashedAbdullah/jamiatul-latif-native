@@ -1,83 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Text, View, Button, Platform, Alert } from "react-native";
 import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
+import Constants from "expo-constants";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
+// Push Notifications সেটআপ করার ফাংশন
+export async function registerForPushNotificationsAsync() {
+  let token = null;
 
-const NotificationComponent = () => {
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const notificationListener = useRef();
-  const responseListener = useRef();
-
-  useEffect(() => {
-    registerForPushNotificationsAsync().then(
-      (token) => token && setExpoPushToken(token)
-    );
-
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        Alert.alert(
-          "Notification Received",
-          notification.request.content.body || "No content"
-        );
-      });
-
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log("Notification response received:", response);
-      });
-
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
-
-  const sendNotification = async () => {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        icon: "",
-        title: "পরীক্ষা সংক্রান্ত!",
-        body: "জামিয়াতুল লতিফের পরীক্ষা আগমী ১২ ডিসেম্বর থেকে আরম্ভ হবে।",
-        sound: true,
-        vibrate: false,
-        color: "#FF231F7C",
-      },
-      trigger: { seconds: 2 },
-    });
-  };
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 20,
-      }}
-    >
-      <Text>Your Expo Push Token:</Text>
-      <Text style={{ marginVertical: 10 }}>
-        {expoPushToken || "Fetching..."}
-      </Text>
-      <Button title="Send Notification" onPress={sendNotification} />
-    </View>
-  );
-};
-
-const registerForPushNotificationsAsync = async () => {
-  let token;
-
-  if (Device.isDevice) {
+  try {
+    // নোটিফিকেশনের জন্য অনুমতি চাওয়া
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -88,32 +17,45 @@ const registerForPushNotificationsAsync = async () => {
     }
 
     if (finalStatus !== "granted") {
-      Alert.alert(
-        "Permission Denied",
-        "Failed to get push token for notifications."
-      );
+      alert("Push notification permission not granted!");
       return null;
     }
 
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log("Expo Push Token:", token);
-  } else {
-    Alert.alert(
-      "Physical Device Required",
-      "Must use a physical device for push notifications."
-    );
-  }
+    // টোকেন জেনারেট করা
+    const projectId =
+      Constants?.expoConfig?.extra?.eas?.projectId ??
+      Constants?.easConfig?.projectId;
 
-  if (Platform.OS === "android") {
-    await Notifications.setNotificationChannelAsync("default", {
-      name: "default",
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
-    });
+    if (!projectId) {
+      throw new Error("EAS Project ID not found in app configuration.");
+    }
+
+    token = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
+
+    
+
+    // টোকেন ব্যাকএন্ডে পাঠানো
+    const response = await fetch(
+      "https://www.jamiatullatif.com/api/expo-notification",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Failed to send token to the server:", error);
+    } else {
+      console.log("Token sent to server successfully.");
+    }
+  } catch (error) {
+    console.error("Error in push notification setup:", error);
+    alert("An error occurred during push notification setup.");
   }
 
   return token;
-};
-
-export default NotificationComponent;
+}

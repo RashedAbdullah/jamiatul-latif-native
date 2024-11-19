@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
 import FavComponent from "@/components/fab";
 import getNotices from "@/fetch/notices";
@@ -9,15 +9,26 @@ import ArticleSection from "@/components/article-section";
 import FatwaSection from "@/components/fatwa-section";
 import HeroImageSection from "@/components/hero-image-section";
 import HeroTextsSection from "@/components/hero-text-section";
-import NotificationComponent from "../../components/notification";
+import { registerForPushNotificationsAsync } from "@/components/notification";
+import * as Notifications from "expo-notifications";
 
 const HomeScreen = () => {
   const { data: notices } = getNotices();
   const [isModalVisible, setIsModalVisible] = useState(true);
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+  }, []);
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
 
   return (
     <ScrollView className="bg-white">
-      <NotificationComponent />
       {notices.length && (
         <NoticeModal
           visible={isModalVisible}
