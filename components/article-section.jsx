@@ -2,15 +2,15 @@ import { View, Text } from "react-native";
 import React from "react";
 import ErrorComponent from "../components/error";
 import LoadingComponent from "../components/loading";
-import getArticles from "../fetch/articles";
-import { TouchableOpacity } from "react-native";
+import { useGetArticles } from "../fetch/articles";
+import { Link } from "expo-router";
 
 const ArticleSection = () => {
   const {
     data: articleData,
     loading: articleLoading,
     error: articleError,
-  } = getArticles(3);
+  } = useGetArticles(3);
 
   return (
     <View className="mt-10 px-4">
@@ -45,11 +45,17 @@ const ArticleSection = () => {
             <Text className="text-gray-600 leading-6 text-lg">
               {article.description}
             </Text>
-            <TouchableOpacity className="mt-3">
+            <Link
+              href={{
+                pathname: `/articles/${article._id}`,
+                params: { id: article._id },
+              }}
+              className="mt-3"
+            >
               <Text className="text-sm font-medium text-green-600 underline">
                 আরও পড়ুন
               </Text>
-            </TouchableOpacity>
+            </Link>
           </View>
         ))
       )}

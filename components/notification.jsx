@@ -32,8 +32,6 @@ export async function registerForPushNotificationsAsync() {
 
     token = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
 
-    
-
     // টোকেন ব্যাকএন্ডে পাঠানো
     const response = await fetch(
       "https://www.jamiatullatif.com/api/expo-notification",

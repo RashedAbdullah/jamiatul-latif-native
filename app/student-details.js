@@ -1,7 +1,6 @@
-import { View, Text, ScrollView, ActivityIndicator, Image } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import React from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons"; // Import Material Icons
 import { useGetSingleStudent } from "../fetch/students";
 import { getEngToBn } from "@/utils/get-eng-to-bn";
 import { useGetSingleStudentsResult } from "../fetch/results";
@@ -109,27 +108,36 @@ const StudentDetailsScreen = () => {
                       result.mark < 40 ? "text-red-600" : "text-gray-800"
                     }`}
                   >
-                    {getEngToBn(result.mark)}
+                    {result.mark === 0 ? "অনুপস্থিত" : getEngToBn(result.mark)}
                   </Text>
                 </View>
               ))}
 
               <View className="flex-row justify-between items-center bg-gray-100 p-3">
-                <Text className="text-gray-700 font-bold">মোট</Text>
+                <Text className="text-gray-700 font-bold">
+                  {!getTotalMarks(resultData.marks) < 1 && "মোট"}
+                </Text>
                 <Text className="text-gray-800 font-bold">
-                  {getEngToBn(getTotalMarks(resultData.marks))}
+                  {!getTotalMarks(resultData.marks) < 1 &&
+                    getEngToBn(getTotalMarks(resultData.marks))}
                 </Text>
               </View>
               <View className="flex-row justify-between items-center bg-gray-100 p-3">
-                <Text className="text-gray-700 font-bold">গড়</Text>
+                <Text className="text-gray-700 font-bold">
+                  {!getTotalMarks(resultData.marks) < 1 && "গড়"}
+                </Text>
                 <Text className="text-gray-800 font-bold">
-                  {getEngToBn(getAverageMarks(resultData.marks))}
+                  {!getTotalMarks(resultData.marks) < 1 &&
+                    getEngToBn(getAverageMarks(resultData.marks))}
                 </Text>
               </View>
               <View className="flex-row justify-between items-center bg-gray-100 p-3">
-                <Text className="text-gray-700 font-bold">বিভাগ</Text>
+                <Text className="text-gray-700 font-bold">
+                  {!getTotalMarks(resultData.marks) < 1 && "বিভাগ"}
+                </Text>
                 <Text className="text-gray-800 font-bold">
-                  {getMarksValue(resultData.marks)}
+                  {!getTotalMarks(resultData.marks) < 1 &&
+                    getMarksValue(resultData.marks)}
                 </Text>
               </View>
             </View>

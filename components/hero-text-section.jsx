@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { Link } from "expo-router";
 
 const HeroTextsSection = () => {
   return (
@@ -17,12 +17,18 @@ const HeroTextsSection = () => {
 
       {/* Buttons */}
       <View className="flex-row justify-center gap-2 mt-5">
-        <TouchableOpacity className="flex-row items-center bg-[#1e656d] py-2 px-4 rounded-lg mx-1">
+        <Link
+          href="/opinion"
+          className="flex-row items-center bg-[#1e656d] py-2 px-4 rounded-lg mx-1"
+        >
           <Text className="text-white font-medium">মতামত দিন</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="flex-row items-center bg-transparent border border-[#1e656d] py-2 px-4 rounded-lg mx-1">
+        </Link>
+        <Link
+          href="/about"
+          className="flex-row items-center bg-transparent border border-[#1e656d] py-2 px-4 rounded-lg mx-1"
+        >
           <Text className="text-[#1e656d] font-medium">আরও জানুন</Text>
-        </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );

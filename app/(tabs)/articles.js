@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, Image, FlatList } from "react-native";
 import { Link } from "expo-router";
-import getArticles from "../../fetch/articles";
+import { useGetArticles } from "../../fetch/articles";
 import LoadingComponent from "../../components/loading";
 import ErrorComponent from "../../components/error";
 
 const ArticlesScreen = () => {
-  const { data: articles, loading, error } = getArticles();
+  const { data: articles, loading, error } = useGetArticles();
 
   if (loading) {
     return <LoadingComponent />;
@@ -43,7 +43,12 @@ const ArticleCard = ({ article }) => (
       }
       className="w-full h-48 rounded-md mb-3"
     />
-    <Link href="/">
+    <Link
+      href={{
+        pathname: `/articles/${article._id}`,
+        params: { id: article._id },
+      }}
+    >
       <Text className="text-xl font-bold text-gray-900 mb-2">
         {article.title}
       </Text>

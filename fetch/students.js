@@ -12,7 +12,7 @@ const useGetStudentsByYear = (yearId = "66f13d0337317a1fbb7e7ff7") => {
       return;
     }
 
-    const controller = new AbortController(); // For canceling fetch requests
+    const controller = new AbortController();
     const getData = async () => {
       setLoading(true);
       setError(null);

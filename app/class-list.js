@@ -2,7 +2,6 @@ import {
   View,
   Text,
   ScrollView,
-  ActivityIndicator,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
@@ -41,8 +40,32 @@ const ClassListByYear = () => {
   return (
     <ScrollView className="bg-gray-50">
       <View className="p-4">
-        <Text className="text-2xl font-bold text-blue-600 text-center mb-4">
-          শিক্ষাবর্ষ ও ক্লাস
+        <Text className="text-2xl font-bold text-blue-600 text-center py-4">
+          ২০২৪-২০২৫ শিক্ষাবর্ষ
+        </Text>
+
+        {classesData.map((cls) => (
+          <TouchableOpacity
+            key={cls._id}
+            style={[styles.card, styles.shadow]}
+            onPress={() =>
+              router.push({
+                pathname: "/students",
+                params: {
+                  yearId: "66f13d0337317a1fbb7e7ff7",
+                  classId: cls._id,
+                },
+              })
+            }
+          >
+            <Text className="text-lg font-medium text-blue-900">
+              {cls.class}
+            </Text>
+          </TouchableOpacity>
+        ))}
+
+        <Text className="text-2xl font-bold text-blue-600 text-center py-4 mt-10">
+          বিগত শিক্ষাবর্ষের ছাত্রদের তথ্য দেখুন
         </Text>
 
         {/* Year selection dropdown */}

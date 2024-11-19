@@ -52,7 +52,7 @@ const useGetYears = () => {
     getData();
 
     return () => {
-      controller.abort(); // Cleanup fetch if component unmounts
+      controller.abort();
     };
   }, []);
 

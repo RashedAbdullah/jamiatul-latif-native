@@ -55,11 +55,11 @@ export default function RootLayout() {
           <Stack.Screen name="about" options={{ title: "মাদ্রাসা পরিচিতি" }} />
           <Stack.Screen
             name="class-list"
-            options={{ title: "শিক্ষাবর্ষ ও ক্লাস" }}
+            options={{ title: "ক্লাস সিলেক্ট করুন" }}
           />
           <Stack.Screen
             name="results-list"
-            options={{ title: "শিক্ষাবর্ষ ও ক্লাস" }}
+            options={{ title: "ক্লাস সিলেক্ট করুন" }}
           />
         </Stack>
         <StatusBar backgroundColor="#C5DEFE" translucent={false} style="dark" />

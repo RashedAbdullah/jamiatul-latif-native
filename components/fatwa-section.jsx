@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native";
 import ErrorComponent from "../components/error";
 import LoadingComponent from "../components/loading";
 import getFatwas from "@/fetch/fatwas";
+import { Link } from "expo-router";
 
 const FatwaSection = () => {
   const {
@@ -35,11 +36,11 @@ const FatwaSection = () => {
             <Text className="text-gray-600 leading-6 text-lg">
               উত্তর: {fatwa.answer.slice(0, 100)}...
             </Text>
-            <TouchableOpacity className="mt-3">
+            <Link href="/(tabs)/fatwas" className="mt-3">
               <Text className="text-sm font-medium text-green-600 underline">
                 বিস্তারিত দেখুন
               </Text>
-            </TouchableOpacity>
+            </Link>
           </View>
         ))
       )}

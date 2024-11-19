@@ -11,6 +11,7 @@ import HeroImageSection from "@/components/hero-image-section";
 import HeroTextsSection from "@/components/hero-text-section";
 import { registerForPushNotificationsAsync } from "@/components/notification";
 import * as Notifications from "expo-notifications";
+import Footer from "@/components/footer";
 
 const HomeScreen = () => {
   const { data: notices } = getNotices();
@@ -29,13 +30,12 @@ const HomeScreen = () => {
 
   return (
     <ScrollView className="bg-white">
-      {notices.length && (
-        <NoticeModal
-          visible={isModalVisible}
-          onClose={() => setIsModalVisible(false)}
-          notice={notices[0]}
-        />
-      )}
+      <NoticeModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        notice={notices[0]}
+      />
+
       <FavComponent />
       <View className="flex-1 p-4">
         <HeroImageSection />
@@ -44,6 +44,7 @@ const HomeScreen = () => {
         <DarulIftaSection />
         <ArticleSection />
         <FatwaSection />
+        {/* <Footer /> */}
       </View>
     </ScrollView>
   );
