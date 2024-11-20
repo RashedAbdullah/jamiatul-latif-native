@@ -45,7 +45,7 @@ export default function RootLayout() {
           }}
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
+
           <Stack.Screen name="teachers" options={{ title: "শিক্ষকবৃন্দ" }} />
           <Stack.Screen
             name="students"
@@ -61,7 +61,10 @@ export default function RootLayout() {
             name="results-list"
             options={{ title: "ক্লাস সিলেক্ট করুন" }}
           />
+          <Stack.Screen name="opinion" options={{ title: "মতামত দিন" }} />
+          <Stack.Screen name="+not-found" />
         </Stack>
+
         <StatusBar backgroundColor="#C5DEFE" translucent={false} style="dark" />
       </ThemeProvider>
     </PaperProvider>
