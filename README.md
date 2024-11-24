@@ -1,4 +1,4 @@
-# Jamiatul Latif React Native Expo Project Documentation
+# Jamiatul Latif
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 
 ## Project Overview
 
-The **Jamiatul Latif React Native Expo Project** is a mobile application designed to manage and streamline Madrasha operations. It supports functionalities like managing teacher and student data, tracking exam results, and enhancing communication. This app is a mobile-friendly version of the web platform `jamiatullatif.com`.
+The **Jamiatul Latif React Native Expo Project** is a mobile application designed to manage and streamline Madrasha operations. It supports functionalities like managing teacher and student data, tracking exam results, and enhancing communication. This app is a mobile-friendly version of the web platform `https://www.jamiatullatif.com`.
 
 ---
 
@@ -28,7 +28,7 @@ The **Jamiatul Latif React Native Expo Project** is a mobile application designe
 - **Result Tracking**: Track and update student exam results.
 - **Notice Board**: View and publish important notices.
 - **Multilingual Support**: Primary interface language in Bangla.
-- **Responsive Design**: Works seamlessly on both Android and iOS devices.
+- **Responsive Design**: Works seamlessly on Android and iOS devices.
 
 ---
 
@@ -36,14 +36,7 @@ The **Jamiatul Latif React Native Expo Project** is a mobile application designe
 
 - **React Native**: Framework for building cross-platform mobile apps.
 - **Expo**: Development platform for React Native apps.
-- **Firebase**: Backend services for authentication and real-time data storage.
+- **Node.js And Next.js**: Backend services for authentication and real-time data storage.
 - **Tailwind CSS (NativeWind)**: Utility-first CSS framework for styling.
 
 ---
-
-## Setup and Installation
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/username/jamiatul-latif.git
-   cd jamiatul-latif
