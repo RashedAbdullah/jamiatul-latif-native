@@ -5,14 +5,6 @@
 1. [Project Overview](#project-overview)
 2. [Features](#features)
 3. [Tech Stack](#tech-stack)
-4. [Setup and Installation](#setup-and-installation)
-5. [Folder Structure](#folder-structure)
-6. [Key Functionalities](#key-functionalities)
-7. [Running the App](#running-the-app)
-8. [Troubleshooting](#troubleshooting)
-9. [Contributing](#contributing)
-10. [License](#license)
-
 ---
 
 ## Project Overview
