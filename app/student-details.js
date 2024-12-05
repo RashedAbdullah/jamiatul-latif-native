@@ -21,6 +21,8 @@ const StudentDetailsScreen = () => {
     error: resultError,
   } = useGetSingleStudentsResult(studentId);
 
+  console.log(resultData);
+
   if (loading || resultLoading) {
     return <LoadingComponent />;
   }

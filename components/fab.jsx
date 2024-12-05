@@ -13,7 +13,7 @@ const MyComponent = () => {
       <FAB.Group
         open={open}
         visible
-        icon={open ? "account-plus" : "account-edit"}
+        icon={open ? "close" : "menu"}
         color="white"
         variant="surface"
         actions={[
