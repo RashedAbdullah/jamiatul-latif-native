@@ -12,8 +12,7 @@ import "react-native-reanimated";
 import "../global.css";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import Header from "@/components/header-footer/header";
-import { MD3LightTheme, PaperProvider } from "react-native-paper";
-import { registerForPushNotificationsAsync } from "@/components/notification";
+import { PaperProvider } from "react-native-paper";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
